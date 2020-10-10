@@ -1,14 +1,17 @@
 package controllers
 
-class GPT2Controller @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+import java.nio.file.Paths
 
-  def version = Action.async {
+import org.tensorflow.{SavedModelBundle, Tensor, TensorFlow, Tensors}
+import play.api.libs.json.Json
+import play.api.mvc.{BaseController, ControllerComponents}
+
+class GPT2Controller extends BaseController {
+
+/*
+  def predict = Action.async(parse.json) {
     // TODO
   }
-
-
-  def predict(id: BSONObjectID) = Action.async(parse.json) {
-    // TODO
-  }
-
+*/
+  override protected def controllerComponents: ControllerComponents = ???
 }

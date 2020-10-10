@@ -10,4 +10,15 @@ class Encoder(var resourcePath: String) {
 
   var encoder: Map[String, Int] = Json.parse(encoderFileStream).as[Map[String, Int]]
   var decoder: Map[Int, String] = encoder.map(_.swap)
+
+  def encodeText(text: String): Array[Integer] = text.split(" ").map(word => encodeWord(word))
+
+  def encodeWord(word: String): Integer = {
+    if (encoder.contains(word)){
+      encoder(word)
+    }
+    else{
+      // compare all substrings
+    }
+  }
 }

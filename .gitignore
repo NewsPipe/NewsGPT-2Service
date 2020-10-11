@@ -1,4 +1,6 @@
 conf/tfmodel
+test/models/tfmodel
+
 logs
 project/project
 project/target

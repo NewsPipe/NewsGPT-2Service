@@ -1,7 +1,10 @@
-# Newsgen Backend
+# GPT2 Service in Scala 
+A service to generate texts with GPT-2 written in Scala with Tensorflow Java and Play
 
-Newsgen uses Tensorflow Java to run GPT-2 in scala. The whole service is written with Play
-
+## Requirements
+- Scala 2.12.2
+- Python3
+- wget
 
 ## Getting started
 
@@ -22,5 +25,8 @@ curl -X POST \
   -v "http://localhost:9000/predict" \
   -d '{"text":"Hi I just met you"}'
 ```
-
+with output:
+```
+{"prediction": "..."}
+```
 

@@ -23,6 +23,8 @@ sbt test
 **Start GPT-2 service on localhost:9000** 
 ```
 sbt run
+```
+
 
 ## Example request
 
@@ -34,7 +36,9 @@ curl -X POST \
   -v "http://localhost:9000/predict" \
   -d '{"text":"Hi I just met you"}'
 ```
+
 This will give you a JSON with following pattern as output:
+
 ```
 {"prediction": "..."}
 ```

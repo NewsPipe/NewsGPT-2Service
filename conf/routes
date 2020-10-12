@@ -5,4 +5,5 @@
 
 # An example controller showing how to use dependency injection
 POST        /predict        controllers.GPT2Controller.predict
+POST        /predict_dummy        controllers.GPT2Controller.predict_dummy
 

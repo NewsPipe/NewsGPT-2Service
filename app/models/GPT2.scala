@@ -10,7 +10,7 @@ class GPT2(var resourcePath: String) {
 
   var loadedModel: Session = SavedModelBundle.load(modelPath, "serve").session()
 
-  def predict(inputData: Tensor[Integer]): Any = loadedModel.runner()
+  def predict(inputData: Tensor[Integer]) = loadedModel.runner()
     .feed("Placeholder:0", inputData)
     .fetch("sample_sequence/while/Exit_3:0")
     .run().get(0)

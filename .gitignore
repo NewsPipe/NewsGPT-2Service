@@ -1,5 +1,5 @@
-conf/tfmodel
-test/models/tfmodel
+conf/trained_models
+test/models/model
 
 logs
 project/project

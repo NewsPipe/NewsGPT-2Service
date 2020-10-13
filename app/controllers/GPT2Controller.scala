@@ -1,5 +1,8 @@
 package controllers
 
+import java.io.File
+import java.nio.file.Paths
+
 import models.{Encoder, GPT2, GPT2Input}
 import org.tensorflow.Tensors
 import javax.inject._
@@ -15,9 +18,34 @@ class GPT2Controller @Inject()(implicit ec: ExecutionContext,
                               ) extends BaseController {
 
   val resourcePath: String = env.classLoader.getResource("").getPath
-  val encoder: Encoder = new Encoder(resourcePath)
-  val gpt2: GPT2 = new GPT2(resourcePath)
+  val modelDir: String = Paths.get(resourcePath, "trained_models").toString
+  var modelIndex: Int = 0
 
+  val modelNames: Array[String] = (new File(modelDir))
+    .listFiles
+    .filter(_.isDirectory)
+    .map(_.getName)
+
+  // default model is the first one
+  var modelPath: String = Paths.get(modelDir, modelNames(modelIndex)).toString
+  var encoder: Encoder = new Encoder(resourcePath = resourcePath, modelPath = modelPath)
+  var gpt2: GPT2 = new GPT2(modelPath)
+
+  def getModels: Action[AnyContent] = Action {
+    Ok(Json.toJson(modelNames))
+  }
+
+  def getModel: Action[AnyContent] = Action {
+    Ok(Json.toJson(modelNames(modelIndex))).as(JSON)
+  }
+
+  def setModel(id: Int): Action[AnyContent] = Action {
+    modelIndex = id
+    modelPath = Paths.get(modelDir, modelNames(modelIndex)).toString
+    encoder = new Encoder(resourcePath, modelPath)
+    gpt2 = new GPT2(modelPath)
+    Ok(Json.toJson(modelNames(id)))
+  }
 
   def predict: Action[JsValue] = Action(parse.json) { request =>
     val inputData = request.body.validate[GPT2Input]

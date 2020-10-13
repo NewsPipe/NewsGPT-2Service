@@ -1,12 +1,15 @@
 package models
 
+import java.nio.file.Paths
+
 import org.scalatest.FunSuite
 
 class EncoderTest extends FunSuite {
 
   test("Encoder.encodeText.example1") {
     val resourcePath = getClass.getResource("").getPath
-    val encoder = new Encoder(resourcePath)
+    val modelPath = Paths.get(resourcePath, "trained_models/tfmodel").toString
+    val encoder = new Encoder(resourcePath, modelPath)
     val msg = "Hi I just met you, and you are crazy"
     val encoded_msg = encoder.encode(msg)
     val expected_msg = Array(39, 72, 220, 40, 1353, 1251, 293, 11, 295, 293, 448, 1843, 89, 88)
@@ -14,7 +17,8 @@ class EncoderTest extends FunSuite {
   }
   test("Encoder.encodeText.example2") {
     val resourcePath = getClass.getResource("").getPath
-    val encoder = new Encoder(resourcePath)
+    val modelPath = Paths.get(resourcePath, "trained_models/tfmodel").toString
+    val encoder = new Encoder(resourcePath, modelPath)
     val msg = "Thomas arbeitet als Programmierer und führt nebenbei unter dem Pseudonym Neo Jobs als professioneller " +
       "Hacker aus. Ihn beschleicht das Gefühl, dass etwas Unvorstellbares und Geheimnisvolles sein Leben lenkt. Das Gefühl wird zur Gewissheit, als die Hackerin Trinity ihm den Anführer Morpheus vorstellt."
     val encoded_msg = encoder.encode(msg)
@@ -30,7 +34,8 @@ class EncoderTest extends FunSuite {
 
   test("Encoder.decodeText.example1") {
     val resourcePath = getClass.getResource("").getPath
-    val encoder = new Encoder(resourcePath)
+    val modelPath = Paths.get(resourcePath, "trained_models/tfmodel").toString
+    val encoder = new Encoder(resourcePath, modelPath)
     val msg = Array(39, 72, 220, 40, 1353, 1251, 293, 11, 295, 293, 448, 1843, 89, 88)
 
     val encoded_msg = encoder.decode(msg)

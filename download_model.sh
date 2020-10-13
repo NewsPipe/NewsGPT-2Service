@@ -4,3 +4,4 @@ cp -r ./tfmodel ./conf/
 cp -r ./tfmodel ./test/models/
 
 rm -rf tfmodel
+rm tfmodel.zip
